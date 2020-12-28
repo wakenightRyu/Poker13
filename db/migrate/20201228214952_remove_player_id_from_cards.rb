@@ -1,0 +1,5 @@
+class RemovePlayerIdFromCards < ActiveRecord::Migration[6.0]
+  def change
+    remove_column :cards, :player_id, :integer
+  end
+end

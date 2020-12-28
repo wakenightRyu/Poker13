@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  suite: MyString
+  value: 1
+  hand_id: 1
+  play_id: 1
+
+two:
+  name: MyString
+  suite: MyString
+  value: 1
+  hand_id: 1
+  play_id: 1

@@ -1,0 +1,3 @@
+class Hand < ApplicationRecord
+   
+end
