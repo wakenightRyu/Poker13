@@ -1,0 +1,41 @@
+.current-hand-div {
+    margin-left: -66px;
+    text-align: center; 
+    margin-top: 556px;
+}
+
+.player-2-hand-div {
+    margin-left: -66px;
+    text-align: center;
+    position: absolute;
+    top: 260px;
+    left: -120px;
+    transform: rotate(90deg);
+}
+
+.player-3-hand-div {
+    margin-left: -66px;
+    text-align: center;
+    position: absolute;
+    top: 35px;
+    left: 513px;
+    transform: rotate(180deg);
+}
+
+.player-4-hand-div {
+    margin-left: -66px;
+    text-align: center;
+    position: absolute;
+    top: 329px;
+    right: -182px;
+    transform: rotate(270deg);
+}
+
+.card-div {
+    display: inline-block;
+    margin-right: -66px;
+}
+
+.card-image {
+    height: 150px;
+}

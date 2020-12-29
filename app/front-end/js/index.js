@@ -6,36 +6,36 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(results => displayCards(results))
 
     function displayCards(results) {
-        const cards = results['data']
+        const cards52 = results['data']
 
-        //random 13 cards for current player hand 
-        const currentHand = cards.sort(() => Math.random() - Math.random()).slice(0, 13)
-
-        //current hand div wrapper
+        // random 13 cards for current player hand 
+        //https://stackoverflow.com/questions/19269545/how-to-get-a-number-of-random-elements-from-an-array
+        
+        // ============
+        // CURRENT HAND
+        // ============
+        const currentHand = cards52.sort(() => Math.random() - Math.random()).slice(0, 13)
+console.log(currentHand)
+        // current hand div wrapper
         const currentHandDiv = document.createElement('div')
         main.appendChild(currentHandDiv)
-        currentHandDiv.classList.add("currentHandDiv")
-        currentHandDiv.style.marginLeft = "-66px"
-        currentHandDiv.style.textAlign = "center"
+        currentHandDiv.classList.add("current-hand-div")
 
         for (let card of currentHand) {
 
-            //card div
+            // card div
             const div = document.createElement('div')
             currentHandDiv.appendChild(div)
-            div.style.display = "inline-block"
-            div.style.marginRight= "-66px"
-            div.style.marginTop = "556px"
+            div.classList.add("card-div")
 
-            //card image
+            // card image
             const img = document.createElement('img')
             div.appendChild(img)
-            img.style.height="150px"
+            img.classList.add("card-image")
             img.src = card.attributes.img_link
             img.value = card.attributes.value
-            console.log(img.value)
             
-            //card event listener click
+            // card event listener click
             img.addEventListener("click", () => {
                 // const highlight = document.createElement('div')
                 // div.append(highlight)
@@ -46,13 +46,104 @@ document.addEventListener('DOMContentLoaded', () => {
                 // highlight.style.backgroundColor = "rgba(0,0,0,.2)"
                 // highlight.style.marginTop = "-130px"
                 // highlight.style.position = "absolute"
-                
-                
-               
             })
+        } // for (let card of currentHand)
+
+
+        // =============
+        // PLAYER 2 HAND
+        // =============
+        const cards39 = cards52.filter(x => !currentHand.includes(x))
+
+        const player2Hand = cards39.sort(() => Math.random() - Math.random()).slice(0, 13)
+        
+        let distributedCards = currentHand.concat(player2Hand)
+console.log(distributedCards)
+        // player 2 div wrapper
+        const player2HandDiv = document.createElement('div')
+        main.appendChild(player2HandDiv)
+        player2HandDiv.classList.add("player-2-hand-div")
+
+        for (let card of player2Hand) {
+
+            // card div
+            const div = document.createElement('div')
+            player2HandDiv.appendChild(div)
+            div.classList.add("card-div")
             
-        }
-    }
+            // card image
+            const img = document.createElement('img')
+            div.appendChild(img)
+            img.classList.add("card-image")
+            img.src = card.attributes.img_link
+            img.value = card.attributes.value
+
+        } // for (let card of player2Hand)
+
+
+        // =============
+        // PLAYER 3 HAND
+        // =============
+        const cards26 = cards52.filter(x => !distributedCards.includes(x))
+
+        const player3Hand = cards26.sort(() => Math.random() - Math.random()).slice(0, 13)
+        
+        distributedCards = distributedCards.concat(player3Hand)
+console.log(distributedCards)
+
+        // player 3 div wrapper
+        const player3HandDiv = document.createElement('div')
+        main.appendChild(player3HandDiv)
+        player3HandDiv.classList.add("player-3-hand-div")
+
+        for (let card of player3Hand) {
+
+            // card div
+            const div = document.createElement('div')
+            player3HandDiv.appendChild(div)
+            div.classList.add("card-div")
+            
+            // card image
+            const img = document.createElement('img')
+            div.appendChild(img)
+            img.classList.add("card-image")
+            img.src = card.attributes.img_link
+            img.value = card.attributes.value
+            
+        } // for (let card of player3Hand)
+
+
+        // =============
+        // PLAYER 4 HAND
+        // =============
+        const cards13 = cards52.filter(x => !distributedCards.includes(x))
+
+        const player4Hand = cards13
+        
+
+        // player 4 div wrapper
+        const player4HandDiv = document.createElement('div')
+        main.appendChild(player4HandDiv)
+        player4HandDiv.classList.add("player-4-hand-div")
+
+        for (let card of player4Hand) {
+
+            // card div
+            const div = document.createElement('div')
+            player4HandDiv.appendChild(div)
+            div.classList.add("card-div")
+            
+            // card image
+            const img = document.createElement('img')
+            div.appendChild(img)
+            img.classList.add("card-image")
+            img.src = card.attributes.img_link
+            img.value = card.attributes.value
+            
+            
+        } // for (let card of player4Hand)
+
+    } // function displayCards(results)
 
 
 
