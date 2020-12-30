@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentHandDiv.classList.add("current-hand-div")
         currentHandDiv.id = "sortablelist"
 
+        // Sortable JS article: https://www.solodev.com/blog/web-design/how-to-create-sortable-lists-with-sortablejs.stml
         new Sortable(sortablelist, {
             animation: 150,
             ghostClass: 'sortable-ghost'
