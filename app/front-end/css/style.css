@@ -34,8 +34,14 @@
 .card-div {
     display: inline-block;
     margin-right: -66px;
+    cursor: move;
 }
 
 .card-image {
     height: 150px;
 }
+
+
+
+  
+ 

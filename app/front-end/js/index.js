@@ -15,11 +15,18 @@ document.addEventListener('DOMContentLoaded', () => {
         // CURRENT HAND
         // ============
         const currentHand = cards52.sort(() => Math.random() - Math.random()).slice(0, 13)
-console.log(currentHand)
+        //console.log(currentHand)
+
         // current hand div wrapper
         const currentHandDiv = document.createElement('div')
         main.appendChild(currentHandDiv)
         currentHandDiv.classList.add("current-hand-div")
+        currentHandDiv.id = "sortablelist"
+
+        new Sortable(sortablelist, {
+            animation: 150,
+            ghostClass: 'sortable-ghost'
+        });
 
         for (let card of currentHand) {
 
@@ -47,6 +54,35 @@ console.log(currentHand)
                 // highlight.style.marginTop = "-130px"
                 // highlight.style.position = "absolute"
             })
+
+            // card event listener drag & drop 
+            div.addEventListener('start', ev => {
+            })
+
+            const newCurrentHand = (event, currentHand) => {
+                const movedCard = currentHand.find((card,index) => index === event.oldIndex)
+                const otherCards = currentHand.filter((card,index) => index !== event.oldIndex)
+
+                const newHandOrder = [
+                    ...otherCards.slice(0, event.newIndex), 
+                    movedCard, 
+                    ...otherCards.slice(event.newIndex)    
+                ]
+
+                return newHandOrder
+            }
+
+
+
+
+
+
+
+
+
+
+
+
         } // for (let card of currentHand)
 
 
@@ -58,7 +94,8 @@ console.log(currentHand)
         const player2Hand = cards39.sort(() => Math.random() - Math.random()).slice(0, 13)
         
         let distributedCards = currentHand.concat(player2Hand)
-console.log(distributedCards)
+        //console.log(distributedCards)
+
         // player 2 div wrapper
         const player2HandDiv = document.createElement('div')
         main.appendChild(player2HandDiv)
@@ -89,7 +126,7 @@ console.log(distributedCards)
         const player3Hand = cards26.sort(() => Math.random() - Math.random()).slice(0, 13)
         
         distributedCards = distributedCards.concat(player3Hand)
-console.log(distributedCards)
+        //console.log(distributedCards)
 
         // player 3 div wrapper
         const player3HandDiv = document.createElement('div')
@@ -119,8 +156,8 @@ console.log(distributedCards)
         const cards13 = cards52.filter(x => !distributedCards.includes(x))
 
         const player4Hand = cards13
-        
-
+        distributedCards = distributedCards.concat(player4Hand)
+    
         // player 4 div wrapper
         const player4HandDiv = document.createElement('div')
         main.appendChild(player4HandDiv)
