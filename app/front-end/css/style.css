@@ -1,5 +1,16 @@
+.submit {
+    font-size: 16px;
+    padding: 6px 10px 6px 10px;
+    position: absolute;
+    margin-left: -54px;
+    bottom: 280px;
+    border-radius: 6px;
+    border: none;
+}
+
 .current-hand-div {
-    margin-left: -66px;
+    position: absolute;
+    left: 381px;
     text-align: center; 
     margin-top: 556px;
 }
@@ -32,7 +43,8 @@
 }
 
 .card-div {
-    display: inline-block;
+    /* display: inline-block; */
+    float: left;
     margin-right: -66px;
     cursor: move; /* Sortable JS */
 }
@@ -41,6 +53,12 @@
     height: 150px;
 }
 
+.submitted-play {
+    position: absolute;
+    top: 305px;
+    left: 580px;
+
+}
 
 
   

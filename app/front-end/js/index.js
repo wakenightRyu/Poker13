@@ -1,6 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
     let main = document.querySelector('#main')
+    let form = document.querySelector('#form')
+
+    // sumbit play button
+    const submit = document.createElement('input')
+    submit.type = "submit"
+    form.appendChild(submit)
+    submit.innerText = "Submit Play"
+    submit.style.visibility = "hidden"
+    submit.classList.add("submit")
     
+    // Rails API fetch
     fetch('http://localhost:3000/cards')
     .then(resp => resp.json())
     .then(results => displayCards(results))
@@ -14,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // ============
         // CURRENT HAND
         // ============
-        const currentHand = cards52.sort(() => Math.random() - Math.random()).slice(0, 13)
+        let currentHand = cards52.sort(() => Math.random() - Math.random()).slice(0, 13)
         //console.log(currentHand)
 
         // current hand div wrapper
@@ -40,50 +50,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const img = document.createElement('img')
             div.appendChild(img)
             img.classList.add("card-image")
+            img.classList.add("unselected")
             img.src = card.attributes.img_link
             img.value = card.attributes.value
+            img.id = card.attributes.name   // necessary to tag card to img to div
+            div.id = card.attributes.name   // necessary to tag card to img to div
+            card.id = card.attributes.name  // necessary to tag card to img to div
             
-            // card event listener click
-            img.addEventListener("click", () => {
-                // const highlight = document.createElement('div')
-                // div.append(highlight)
-                // highlight.classList.add("selected")
-                // highlight.style.height = "130px"
-                // highlight.style.width = "93px"
-                // highlight.style.borderRadius = "4px"
-                // highlight.style.backgroundColor = "rgba(0,0,0,.2)"
-                // highlight.style.marginTop = "-130px"
-                // highlight.style.position = "absolute"
-            })
-
-            // card event listener drag & drop 
-            div.addEventListener('start', ev => {
-            })
-
-            const newCurrentHand = (event, currentHand) => {
-                const movedCard = currentHand.find((card,index) => index === event.oldIndex)
-                const otherCards = currentHand.filter((card,index) => index !== event.oldIndex)
-
-                const newHandOrder = [
-                    ...otherCards.slice(0, event.newIndex), 
-                    movedCard, 
-                    ...otherCards.slice(event.newIndex)    
-                ]
-
-                return newHandOrder
-            }
-
-
-
-
-
-
-
-
-
-
-
-
         } // for (let card of currentHand)
 
 
@@ -114,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
             div.appendChild(img)
             img.classList.add("card-image")
             img.src = card.attributes.img_link
-            img.value = card.attributes.value
+            // img.value = card.attributes.value
 
         } // for (let card of player2Hand)
 
@@ -146,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
             div.appendChild(img)
             img.classList.add("card-image")
             img.src = card.attributes.img_link
-            img.value = card.attributes.value
+            // img.value = card.attributes.value
             
         } // for (let card of player3Hand)
 
@@ -176,16 +149,80 @@ document.addEventListener('DOMContentLoaded', () => {
             div.appendChild(img)
             img.classList.add("card-image")
             img.src = card.attributes.img_link
-            img.value = card.attributes.value
-            
+            // img.value = card.attributes.value
             
         } // for (let card of player4Hand)
-
     } // function displayCards(results)
 
+    let selectedDivs = []  // array of selected divs  
 
+    // event listener select cards
+    document.addEventListener("click", (e) => {
+        let img = e.target
 
+        if (img.classList.contains("unselected")) {
+            img.classList.remove("unselected")
+            img.classList.add("selected")
+            img.style.marginTop = "-70px"  // elevate selected cards
 
+            // submit button appears when 1 card is selected
+            setTimeout(submitButtonAppear, 700)
+            function submitButtonAppear() {
+                submit.style.visibility = "visible"
+            }
 
+        } else {
+            img.classList.remove("selected")
+            img.classList.add("unselected")
+            img.style.marginTop = "0px"
+        }
+
+        let selectedCards = document.getElementsByClassName("selected")  // HTML collection of selected imgs
+        
+        for (let img of selectedCards) {
+            let div = document.querySelector(`div#${img.id}`)  // finds div of img
+            
+            console.log(selectedCards)
+            console.log(selectedDivs)
+            
+            if (!selectedDivs.includes(div)) {  // ensures unique array of selected divs
+                selectedDivs.push(div)
+            }
+            
+        }
+
+        // event listener submit cards
+        form.addEventListener("submit", (e) => {
+            e.preventDefault()
+            submittedPlay = document.querySelector(".submitted-play")
+
+            if (submittedPlay.length > 0) {
+                submittedPlay.forEach(div => submittedPlay.removeChild(div))
+            }
+
+            currentHandDiv = document.querySelector(".current-hand-div")
+    
+            selectedDivs.forEach(div => {
+                currentHandDiv.removeChild(div)  // remove selected cards from DOM
+                submittedPlay.appendChild(div) 
+                div.classList.add("card-div")
+                let divIndex = selectedDivs.indexOf(div)
+                selectedDivs.splice(divIndex,1)
+            })  
+
+            // clear selectedDivs
+            console.log(selectedDivs.length)
+        })
+
+    })    
+    
+    
+
+    
+    
+   
 })
+
+
+    
 
