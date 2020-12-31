@@ -161,8 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let img = e.target
 
         if (img.classList.contains("unselected")) {
-            img.classList.remove("unselected")
-            img.classList.add("selected")
+            img.classList.replace("unselected","selected")
             img.style.marginTop = "-70px"  // elevate selected cards
 
             // submit button appears when 1 card is selected
@@ -172,8 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
         } else {
-            img.classList.remove("selected")
-            img.classList.add("unselected")
+            img.classList.replace("selected", "unselected")
             img.style.marginTop = "0px"
         }
 
@@ -191,32 +189,33 @@ document.addEventListener('DOMContentLoaded', () => {
             
         }
 
-        // event listener submit cards
-        form.addEventListener("submit", (e) => {
-            e.preventDefault()
-            submittedPlay = document.querySelector(".submitted-play")
-
-            if (submittedPlay.length > 0) {
-                submittedPlay.forEach(div => submittedPlay.removeChild(div))
-            }
-
-            currentHandDiv = document.querySelector(".current-hand-div")
-    
-            selectedDivs.forEach(div => {
-                currentHandDiv.removeChild(div)  // remove selected cards from DOM
-                submittedPlay.appendChild(div) 
-                div.classList.add("card-div")
-                let divIndex = selectedDivs.indexOf(div)
-                selectedDivs.splice(divIndex,1)
-            })  
-
-            // clear selectedDivs
-            console.log(selectedDivs.length)
-        })
-
+        
     })    
     
-    
+    // event listener submit cards
+    form.addEventListener("submit", (e) => {
+        e.preventDefault()
+        submittedPlay = document.querySelector(".submitted-play")
+
+        if (submittedPlay.length > 0) {
+            submittedPlay.forEach(div => submittedPlay.removeChild(div))
+        }
+
+        currentHandDiv = document.querySelector(".current-hand-div")
+
+        selectedDivs.forEach(div => {
+            currentHandDiv.removeChild(div)  // remove selected cards from DOM
+            submittedPlay.appendChild(div) 
+            div.classList.add("card-div")
+            let divIndex = selectedDivs.indexOf(div)
+        })  
+        selectedDivs.splice(0, selectedDivs.length)
+        
+
+        // clear selectedDivs
+        console.log(selectedDivs.length)
+    })
+
 
     
     
