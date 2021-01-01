@@ -198,30 +198,35 @@ document.addEventListener('DOMContentLoaded', () => {
         // main.appendChild(submittedPlay)
         // submittedPlay.classList.add("submitted-play")
 
-        // if (submittedPlay.length > 0) {
-        //     submittedPlay.forEach(div => submittedPlay.removeChild(div))
-        // }
-
-        let currentHandDiv = document.querySelector(".current-hand-div")
-        let selectedDivs = document.getElementsByClassName("selected")  // HTML collection of selected divs
-        console.log(selectedDivs)
-
-        submittedPlay
-       
-        
-
-        while(selectedDivs[0]) {
-            currentHandDiv.removeChild(selectedDivs[0]);
+        if (submittedPlay.length > 0) {
+            submittedPlay.forEach(div => submittedPlay.removeChild(div))
         }
 
-        let test = document.querySelectorAll(".unselected")
-        console.log(test)
+        let currentHandDiv = document.querySelector(".current-hand-div")
+        let divsSelected = document.querySelectorAll("div.selected")
+
+        console.log(currentHandDiv)
+        console.log(divsSelected)
+        console.log(divsSelected.length)
+       
+        // while (divsSelected.length > 0) {
+        //     (divsSelected).detach().appendTo(submittedPlay)
+        //     // submittedPlay.appendChild(divsSelected)
+        // }
+
+        divsSelected.forEach(div => submittedPlay.appendChild(div))
+
+        // while(selectedDivs[0]) {
+        //     currentHandDiv.removeChild(selectedDivs[0]);
+        // }
+
+       
 
         
         
 
         
-        console.log(selectedDivs)
+        
 console.log(submittedPlay)
         
 //         for (let div of selectedDivs) {
