@@ -185,8 +185,8 @@ document.addEventListener('DOMContentLoaded', () => {
             div.classList.add("selected")
         }
 
-        // console.log(selectedCards)
-        //     console.log(selectedDivs)
+    // console.log(selectedCards)
+    // console.log(selectedDivs)
         
     })    
     
@@ -194,56 +194,26 @@ document.addEventListener('DOMContentLoaded', () => {
     // event listener submit cards
     form.addEventListener("submit", (e) => {
         e.preventDefault()
+        
         let submittedPlay = document.querySelector(".submitted-play")
-        // main.appendChild(submittedPlay)
-        // submittedPlay.classList.add("submitted-play")
+        let divsSelected = document.querySelectorAll("div.selected")  // cards marked "selected" from click event listener
+        let submitted = submittedPlay.querySelectorAll("div.submitted")  // when 
 
-        if (submittedPlay.length > 0) {
-            submittedPlay.forEach(div => submittedPlay.removeChild(div))
-        }
+        submitted.forEach(div => submittedPlay.removeChild(div))
 
-        let currentHandDiv = document.querySelector(".current-hand-div")
-        let divsSelected = document.querySelectorAll("div.selected")
+        divsSelected.forEach(div => {
+            submittedPlay.appendChild(div)
+            div.classList.replace("selected", "submitted")
+            div.classList.add("passive-cards")
+        })
 
-        console.log(currentHandDiv)
-        console.log(divsSelected)
-        console.log(divsSelected.length)
-       
-        // while (divsSelected.length > 0) {
-        //     (divsSelected).detach().appendTo(submittedPlay)
-        //     // submittedPlay.appendChild(divsSelected)
-        // }
+        submit.style.visibility = "hidden"  // submit button invisible after submitting play, until you select a card again
 
-        divsSelected.forEach(div => submittedPlay.appendChild(div))
+    console.log(submittedPlay)
+    })
 
-        // while(selectedDivs[0]) {
-        //     currentHandDiv.removeChild(selectedDivs[0]);
-        // }
-
-       
-
-        
-        
-
-        
-        
-console.log(submittedPlay)
-        
-//         for (let div of selectedDivs) {
-//             currentHandDiv.removeChild(div)  // remove selected cards from DOM
-//             submittedPlay.appendChild(div) 
-//             // div.classList.add("card-div")
-// console.log(submittedPlay)
-//         }
-    })    
-        
-        
-    
-    
-    
-   
 })
 
 
-    
+   
 
