@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const div = document.createElement('div')
             currentHandDiv.appendChild(div)
             div.classList.add("card-div")
+            div.classList.add("unselected")
 
             // card image
             const img = document.createElement('img')
@@ -153,16 +154,18 @@ document.addEventListener('DOMContentLoaded', () => {
             
         } // for (let card of player4Hand)
     } // function displayCards(results)
-
-    let selectedDivs = []  // array of selected divs  
+  
 
     // event listener select cards
     document.addEventListener("click", (e) => {
         let img = e.target
+        let div = document.querySelector(`div#${img.id}`)  // finds div of img
+        // div.classList.add("selected")
+        console.log(div)
 
-        if (img.classList.contains("unselected")) {
-            img.classList.replace("unselected","selected")
-            img.style.marginTop = "-70px"  // elevate selected cards
+        if (div.classList.contains("unselected")) {
+            div.classList.replace("unselected","selected")
+            div.style.marginTop = "-70px"  // elevate selected cards
 
             // submit button appears when 1 card is selected
             setTimeout(submitButtonAppear, 700)
@@ -171,24 +174,19 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
         } else {
-            img.classList.replace("selected", "unselected")
-            img.style.marginTop = "0px"
+            div.classList.replace("selected", "unselected")
+            div.style.marginTop = "0px"
         }
 
         let selectedCards = document.getElementsByClassName("selected")  // HTML collection of selected imgs
         
         for (let img of selectedCards) {
             let div = document.querySelector(`div#${img.id}`)  // finds div of img
-            
-            console.log(selectedCards)
-            console.log(selectedDivs)
-            
-            if (!selectedDivs.includes(div)) {  // ensures unique array of selected divs
-                selectedDivs.push(div)
-            }
-            
+            div.classList.add("selected")
         }
 
+        // console.log(selectedCards)
+        //     console.log(selectedDivs)
         
     })    
     
@@ -202,21 +200,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         currentHandDiv = document.querySelector(".current-hand-div")
+        selectedDivs = document.querySelectorAll(".selected")
 
         selectedDivs.forEach(div => {
             currentHandDiv.removeChild(div)  // remove selected cards from DOM
             submittedPlay.appendChild(div) 
             div.classList.add("card-div")
-            let divIndex = selectedDivs.indexOf(div)
+
         })  
-        selectedDivs.splice(0, selectedDivs.length)
+    })    
         
-
-        // clear selectedDivs
-        console.log(selectedDivs.length)
-    })
-
-
+        
+    
     
     
    
