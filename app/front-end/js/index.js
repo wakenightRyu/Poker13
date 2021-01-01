@@ -190,24 +190,46 @@ document.addEventListener('DOMContentLoaded', () => {
         
     })    
     
+
     // event listener submit cards
     form.addEventListener("submit", (e) => {
         e.preventDefault()
-        submittedPlay = document.querySelector(".submitted-play")
+        submittedPlay = document.createElement("div")
+        main.appendChild(submittedPlay)
+        submittedPlay.classList.add("submitted-play")
 
-        if (submittedPlay.length > 0) {
-            submittedPlay.forEach(div => submittedPlay.removeChild(div))
+        // if (submittedPlay.length > 0) {
+        //     submittedPlay.forEach(div => submittedPlay.removeChild(div))
+        // }
+
+        let currentHandDiv = document.querySelector(".current-hand-div")
+        let selectedDivs = document.getElementsByClassName("selected")  // HTML collection of selected divs
+        console.log(selectedDivs)
+
+        
+       
+        
+
+        while(selectedDivs[0]) {
+        
+            currentHandDiv.removeChild(selectedDivs[0]);
         }
 
-        currentHandDiv = document.querySelector(".current-hand-div")
-        selectedDivs = document.querySelectorAll(".selected")
+        while (selectedDivs[0]) {
+            submittedPlay.appendChild(selectedDivs[0])
+        }
+        
 
-        selectedDivs.forEach(div => {
-            currentHandDiv.removeChild(div)  // remove selected cards from DOM
-            submittedPlay.appendChild(div) 
-            div.classList.add("card-div")
-
-        })  
+        
+        console.log(selectedDivs)
+console.log(submittedPlay)
+        
+//         for (let div of selectedDivs) {
+//             currentHandDiv.removeChild(div)  // remove selected cards from DOM
+//             submittedPlay.appendChild(div) 
+//             // div.classList.add("card-div")
+// console.log(submittedPlay)
+//         }
     })    
         
         
