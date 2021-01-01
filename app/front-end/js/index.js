@@ -194,9 +194,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // event listener submit cards
     form.addEventListener("submit", (e) => {
         e.preventDefault()
-        submittedPlay = document.createElement("div")
-        main.appendChild(submittedPlay)
-        submittedPlay.classList.add("submitted-play")
+        let submittedPlay = document.querySelector(".submitted-play")
+        // main.appendChild(submittedPlay)
+        // submittedPlay.classList.add("submitted-play")
 
         // if (submittedPlay.length > 0) {
         //     submittedPlay.forEach(div => submittedPlay.removeChild(div))
@@ -206,18 +206,18 @@ document.addEventListener('DOMContentLoaded', () => {
         let selectedDivs = document.getElementsByClassName("selected")  // HTML collection of selected divs
         console.log(selectedDivs)
 
-        
+        submittedPlay
        
         
 
         while(selectedDivs[0]) {
-        
             currentHandDiv.removeChild(selectedDivs[0]);
         }
 
-        while (selectedDivs[0]) {
-            submittedPlay.appendChild(selectedDivs[0])
-        }
+        let test = document.querySelectorAll(".unselected")
+        console.log(test)
+
+        
         
 
         
