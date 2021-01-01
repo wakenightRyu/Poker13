@@ -195,21 +195,20 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener("submit", (e) => {
         e.preventDefault()
         
-        let submittedPlay = document.querySelector(".submitted-play")
+        let cardsInPlay = document.querySelector(".cards-in-play")
         let divsSelected = document.querySelectorAll("div.selected")  // cards marked "selected" from click event listener
-        let submitted = submittedPlay.querySelectorAll("div.submitted")  // when 
+        let submitted = cardsInPlay.querySelectorAll("div.submitted")  // when 
 
-        submitted.forEach(div => submittedPlay.removeChild(div))
+        submitted.forEach(div => cardsInPlay.removeChild(div))
 
         divsSelected.forEach(div => {
-            submittedPlay.appendChild(div)
+            cardsInPlay.appendChild(div)
             div.classList.replace("selected", "submitted")
-            div.classList.add("passive-cards")
         })
 
         submit.style.visibility = "hidden"  // submit button invisible after submitting play, until you select a card again
 
-    console.log(submittedPlay)
+    console.log(cardsInPlay)
     })
 
 })
