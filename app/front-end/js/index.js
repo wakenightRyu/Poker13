@@ -203,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         divsSelected.forEach(div => {
             cardsInPlay.appendChild(div)
-            div.classList.replace("selected", "submitted")
+            div.classList.replace("selected", "submitted")  // necessary to remove previously submittedPlay
         })
 
         submit.style.visibility = "hidden"  // submit button invisible after submitting play, until you select a card again
